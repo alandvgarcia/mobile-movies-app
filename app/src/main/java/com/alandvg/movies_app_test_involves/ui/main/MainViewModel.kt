@@ -20,6 +20,10 @@ class MainViewModel : ViewModel() {
             val moviesTopRated = MovieRepository(MovieApiService.movies()).getTopRatedMovies()
             println(moviesTopRated?.results.toString())
 
+
+            val movie = MovieRepository(MovieApiService.movies()).getMovie(555)
+            println(movie?.toString())
+
         }
 
     }

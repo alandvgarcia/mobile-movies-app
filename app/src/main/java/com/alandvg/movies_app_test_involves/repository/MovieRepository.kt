@@ -15,8 +15,15 @@ class MovieRepository(private val apiInterface: MovieEndPoint) : BaseRepository(
 
     suspend fun getTopRatedMovies(page: Int = 1): ResultPaging<List<Movie>>? {
         return safeApiCall(
-            call = { apiInterface.getTopRated(page) },
-            error = "Error  get popular movies"
+            call = { apiInterface.getTopRatedMovies(page) },
+            error = "Error  get top rated movies"
+        )
+    }
+
+    suspend fun getMovie(id: Long): Movie? {
+        return safeApiCall(
+            call = { apiInterface.getMovie(id) },
+            error = "Error  get  movie"
         )
     }
 }
