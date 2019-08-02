@@ -1,0 +1,14 @@
+ext {
+
+    generalDependencies = [
+            roomVersion     : "2.1.0",
+            lifecycleVersion: "2.0.0",
+            appCompat       : '1.1.0-rc01',
+            appCore       : '1.2.0-alpha02',
+            retrofitVersion        : "2.6.0",
+            retrofitCoroutineVersion: "0.9.2",
+            pagingVersion: "2.1.0",
+            googleMaterialVersion:"1.1.0-alpha08"
+    ]
+}
+
