@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 internal object MovieApiService {
 
     val TAG = this@MovieApiService.javaClass.simpleName
-    val url = "https://api.themoviedb.org/3/"
+    val URL_API = "https://api.themoviedb.org/3/"
 
     private fun provideRetrofit(baseUrl: String): Retrofit {
 
@@ -27,6 +27,6 @@ internal object MovieApiService {
             .build()
     }
 
-    internal fun movies() = provideRetrofit(url).create(MovieEndPoint::class.java)
+    internal fun movies() = provideRetrofit(URL_API).create(MovieEndPoint::class.java)
 
 }
