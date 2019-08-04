@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/listUpcomingMoviesFragment"
+        android:icon="@drawable/ic_new_releases_24dp"
+        android:title="" />
+
+    <item
+        android:id="@+id/listPopularMoviesFragment"
+        android:icon="@drawable/ic_trending_up_24dp"
+        android:title="" />
+
+    <item
+        android:id="@+id/listTopRatedMoviesFragment"
+        android:icon="@drawable/ic_stars_top_rating_24px"
+        android:title="" />
+
+    <item
+        android:id="@+id/favoriteMoviesFragment"
+        android:icon="@drawable/ic_favorite_black_24dp"
+        android:title=""/>
+
+
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search_24dp"
+        android:title="" />
+
+
+</menu>

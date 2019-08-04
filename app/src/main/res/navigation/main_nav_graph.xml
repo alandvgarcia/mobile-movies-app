@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_nav_graph"
-    app:startDestination="@id/popularMoviesFragment">
-
+    app:startDestination="@id/listUpcomingMoviesFragment">
     <fragment
-        android:id="@+id/popularMoviesFragment"
-        android:name="com.alandvg.movies_app_test_involves.view.PopularMoviesFragment"
-        android:label="PopularMoviesFragment" />
+        android:id="@+id/listPopularMoviesFragment"
+        android:name="com.alandvg.movies_app_test_involves.view.ListPopularMoviesFragment"
+        android:label="@string/lbl_fragment_popular" />
+    <fragment
+        android:id="@+id/listTopRatedMoviesFragment"
+        android:name="com.alandvg.movies_app_test_involves.view.ListTopRatedMoviesFragment"
+        android:label="@string/lbl_fragment_top_rated" />
+    <fragment
+        android:id="@+id/listUpcomingMoviesFragment"
+        android:name="com.alandvg.movies_app_test_involves.view.ListUpcomingMoviesFragment"
+        android:label="@string/lbl_fragment_upcoming" />
 </navigation>

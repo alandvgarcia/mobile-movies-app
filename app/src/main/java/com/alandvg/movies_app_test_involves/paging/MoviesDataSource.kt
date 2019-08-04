@@ -12,7 +12,14 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class PopularMovieDataSource : PageKeyedDataSource<Int, Movie>(){
+class MoviesDataSource(val endPoint : Int) : PageKeyedDataSource<Int, Movie>(){
+
+
+    companion object{
+        val POPULAR = 1
+        val TOP_RATED = 2
+        val UPCOMING = 3
+    }
 
     private val movieRepository = MovieRepository(MovieApiService.movies())
     private val parentJob: Job = Job()
@@ -25,12 +32,17 @@ class PopularMovieDataSource : PageKeyedDataSource<Int, Movie>(){
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, Movie>
     ) {
-        scope.launch(Dispatchers.IO) {
+        scope.launch {
             updateState(State.LOADING)
             try {
-                val movies = movieRepository.getPopularMovies(1)
+                val movies = when(endPoint){
+                    TOP_RATED -> movieRepository.getTopRatedMovies(1)
+                    UPCOMING -> movieRepository.getUpcomingMovie(1)
+                    else -> movieRepository.getPopularMovies(1)
+                }
+
                 movies?.also {
-                    callback.onResult(it.results, null, 1)
+                    callback.onResult(it.results, null, 2)
                     updateState(State.SUCCESS)
                 }?:run{
                     updateState(State.FAIL)
@@ -42,10 +54,14 @@ class PopularMovieDataSource : PageKeyedDataSource<Int, Movie>(){
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
-        scope.launch(Dispatchers.IO) {
+        scope.launch {
             updateState(State.LOADING)
             try {
-                val movies = movieRepository.getPopularMovies(params.key)
+                val movies = when(endPoint){
+                    TOP_RATED -> movieRepository.getTopRatedMovies(params.key)
+                    UPCOMING -> movieRepository.getUpcomingMovie(params.key)
+                    else -> movieRepository.getPopularMovies(params.key)
+                }
                 movies?.also {
                     callback.onResult(it.results, params.key+1)
                     updateState(State.SUCCESS)
@@ -62,7 +78,7 @@ class PopularMovieDataSource : PageKeyedDataSource<Int, Movie>(){
 
     private fun updateState(state: State) {
         scope.launch(Dispatchers.IO) {
-            this@PopularMovieDataSource.state.postValue(state)
+            this@MoviesDataSource.state.postValue(state)
         }
 
     }

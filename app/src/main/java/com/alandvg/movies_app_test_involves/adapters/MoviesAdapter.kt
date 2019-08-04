@@ -19,7 +19,7 @@ class MoviesAdapter(private val openMovie: (Movie) -> Unit) :
     private val ITEM = 1
     private val FOOTER_LOADING = 2
     private var state = State.LOADING
-    private lateinit var binding : ItemMovieRvBinding
+    private lateinit var binding: ItemMovieRvBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -31,8 +31,7 @@ class MoviesAdapter(private val openMovie: (Movie) -> Unit) :
                     false
                 )
                 return MovieViewHolder(
-                    binding,
-                    parent.context
+                    binding
                 )
             }
             else -> ListFooterViewHolder.create(parent)
@@ -59,7 +58,6 @@ class MoviesAdapter(private val openMovie: (Movie) -> Unit) :
     override fun getItemCount(): Int {
         return (super.getItemCount()) + if (hasFooter()) 1 else 0
     }
-
 
 
     companion object {

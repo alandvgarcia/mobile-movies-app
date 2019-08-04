@@ -20,6 +20,14 @@ class MovieRepository(private val apiInterface: MovieEndPoint) : BaseRepository(
         )
     }
 
+
+    suspend fun getUpcomingMovie(page: Int = 1): ResultPaging<List<Movie>>? {
+        return safeApiCall(
+            call = { apiInterface.getUpComingMovie(page) },
+            error = "Error  get upcoming movies"
+        )
+    }
+
     suspend fun getMovie(id: Long): Movie? {
         return safeApiCall(
             call = { apiInterface.getMovie(id) },

@@ -22,6 +22,13 @@ interface MovieEndPoint {
     ): Response<ResultPaging<List<Movie>>>
 
 
+    @GET("movie/upcoming")
+    suspend fun getUpComingMovie(
+        @Query("page") page: Int,
+        @Query("api_key") apiKey: String = BuildConfig.ApiKey
+    ): Response<ResultPaging<List<Movie>>>
+
+
     @GET("movie/{id}")
     suspend fun getMovie(
         @Path("id") page: Long,

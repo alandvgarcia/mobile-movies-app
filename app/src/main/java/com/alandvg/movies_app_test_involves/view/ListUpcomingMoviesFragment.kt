@@ -12,15 +12,16 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alandvg.movies_app_test_involves.R
 import com.alandvg.movies_app_test_involves.adapters.MoviesAdapter
-import com.alandvg.movies_app_test_involves.databinding.MainFragmentBinding
+import com.alandvg.movies_app_test_involves.databinding.ListMoviesFragmentBinding
 import com.alandvg.movies_app_test_involves.model.Movie
-import com.alandvg.movies_app_test_involves.viewmodel.PopularMoviesViewModel
+import com.alandvg.movies_app_test_involves.paging.MoviesDataSource
+import com.alandvg.movies_app_test_involves.viewmodel.MoviesViewModel
 
-class PopularMoviesFragment : Fragment() {
+class ListUpcomingMoviesFragment : Fragment() {
 
-    private lateinit var viewModel: PopularMoviesViewModel
+    private lateinit var viewModel: MoviesViewModel
     private lateinit var adapter: MoviesAdapter
-    private lateinit var binding: MainFragmentBinding
+    private lateinit var binding: ListMoviesFragmentBinding
 
     private val observerPagedList = Observer<PagedList<Movie>> {
         adapter = MoviesAdapter { movie: Movie -> openMovie(movie) }
@@ -36,16 +37,20 @@ class PopularMoviesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.list_movies_fragment, container, false)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(PopularMoviesViewModel::class.java)
-        binding.rvMovies.layoutManager = LinearLayoutManager(activity!!)
-        viewModel.itensPagedList.observe(viewLifecycleOwner, observerPagedList)
+        viewModel = ViewModelProviders.of(this).get(MoviesViewModel::class.java)
 
+        if (viewModel.listIsEmpty())
+            viewModel.getMovies(MoviesDataSource.UPCOMING)
+
+
+        binding.rvMovies.layoutManager = LinearLayoutManager(activity!!)
+        viewModel.itensPagedList?.observe(viewLifecycleOwner, observerPagedList)
     }
 
 }
