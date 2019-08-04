@@ -13,11 +13,11 @@ class MovieViewHolder(private val binding: ItemMovieRvBinding) :
     fun bind(movie: Movie) {
         binding.tvDescricao.text = movie.overview
         binding.tvTitulo.text = movie.title
-        binding.tvDateRelease.text = movie.release_date
+        binding.tvDateRelease.text = movie.releaseDate
         binding.imgPoster.background = ContextCompat.getDrawable(binding.root.context, android.R.color.darker_gray)
 
         Glide.with(binding.root)
-            .load("http://image.tmdb.org/t/p/w185/" + movie.poster_path)
+            .load("http://image.tmdb.org/t/p/w185/" + movie.posterPath)
             .centerCrop()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(binding.imgPoster)
