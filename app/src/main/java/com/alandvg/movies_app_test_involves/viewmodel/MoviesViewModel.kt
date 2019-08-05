@@ -13,8 +13,10 @@ import com.alandvg.movies_app_test_involves.util.State
 class MoviesViewModel : ViewModel() {
 
     var itensPagedList: LiveData<PagedList<Movie>>? = null
-    private lateinit var state: LiveData<State>
+    private var state: LiveData<State>? = null
     private lateinit var moviesDataSourceFactory: MoviesDataSourceFactory
+
+    fun refresh() = moviesDataSourceFactory.movieDataSourceLiveData.value?.invalidate()
 
     fun getMovies(movieEndpoint: Int) {
         val config = PagedList.Config.Builder()
@@ -30,7 +32,7 @@ class MoviesViewModel : ViewModel() {
 
     }
 
-    fun getState(): LiveData<State> = state
+    fun getState(): LiveData<State>? = state
 
     fun listIsEmpty(): Boolean {
         return itensPagedList?.value?.isEmpty() ?: true
