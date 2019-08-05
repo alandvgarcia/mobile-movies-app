@@ -18,14 +18,14 @@ class MoviesViewModel : ViewModel() {
 
     fun refresh() = moviesDataSourceFactory.movieDataSourceLiveData.value?.invalidate()
 
-    fun getMovies(movieEndpoint: Int) {
+    fun getMovies(movieEndpoint: Int, search : String = "") {
         val config = PagedList.Config.Builder()
             .setPageSize(10)
             .setPrefetchDistance(1)
             .setEnablePlaceholders(true)
             .build()
 
-        moviesDataSourceFactory = MoviesDataSourceFactory(movieEndpoint)
+        moviesDataSourceFactory = MoviesDataSourceFactory(movieEndpoint,search)
         itensPagedList = LivePagedListBuilder(moviesDataSourceFactory, config).build()
         state = Transformations.switchMap<MoviesDataSource,
                 State>(moviesDataSourceFactory.movieDataSourceLiveData, MoviesDataSource::state)

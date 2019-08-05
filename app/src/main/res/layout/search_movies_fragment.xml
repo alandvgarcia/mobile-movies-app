@@ -1,29 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.alandvg.movies_app_test_involves.view.SearchMoviesFragment" >
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.alandvg.movies_app_test_involves.viewmodel.MoviesViewModel" />
+    </data>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:endIconMode="clear_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/ic_search_24dp">
+        android:layout_height="match_parent"
+        tools:context="com.alandvg.movies_app_test_involves.view.SearchMoviesFragment">
 
-        <com.google.android.material.textfield.TextInputEditText
+
+        <androidx.recyclerview.widget.RecyclerView
+            tools:listitem="@layout/item_movie_rv"
+            android:paddingTop="68dp"
+            android:id="@+id/rv_movies_search"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/search_hint" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_search"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                app:boxBackgroundColor="@null"
+                app:boxStrokeColor="@color/colorAccent"
+                app:endIconMode="clear_text"
+                app:hintEnabled="false"
+                app:hintTextColor="@color/colorAccent"
+                app:startIconDrawable="@drawable/ic_search_24dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:focusableInTouchMode="true"
+                    android:id="@+id/tie_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/search_hint"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

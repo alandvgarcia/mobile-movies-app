@@ -12,13 +12,14 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class MoviesDataSource(val endPoint : Int) : PageKeyedDataSource<Int, Movie>(){
+class MoviesDataSource(val endPoint : Int, val search : String = "") : PageKeyedDataSource<Int, Movie>(){
 
 
     companion object{
         val POPULAR = 1
         val TOP_RATED = 2
         val UPCOMING = 3
+        val SEARCH = 4
     }
 
     private val movieRepository = MovieRepository(MovieApiService.movies())
@@ -38,6 +39,7 @@ class MoviesDataSource(val endPoint : Int) : PageKeyedDataSource<Int, Movie>(){
                 val movies = when(endPoint){
                     TOP_RATED -> movieRepository.getTopRatedMovies(1)
                     UPCOMING -> movieRepository.getUpcomingMovie(1)
+                    SEARCH -> movieRepository.searchMovies(1, search)
                     else -> movieRepository.getPopularMovies(1)
                 }
 
@@ -60,6 +62,7 @@ class MoviesDataSource(val endPoint : Int) : PageKeyedDataSource<Int, Movie>(){
                 val movies = when(endPoint){
                     TOP_RATED -> movieRepository.getTopRatedMovies(params.key)
                     UPCOMING -> movieRepository.getUpcomingMovie(params.key)
+                    SEARCH -> movieRepository.searchMovies(params.key, search)
                     else -> movieRepository.getPopularMovies(params.key)
                 }
                 movies?.also {

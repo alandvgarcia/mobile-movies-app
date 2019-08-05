@@ -59,15 +59,12 @@ class ListPopularMoviesFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-
         if (viewModel.listIsEmpty()) {
             viewModel.getMovies(MoviesDataSource.POPULAR)
         }
 
-
         binding.rvMovies.layoutManager = LinearLayoutManager(activity!!)
         viewModel.itensPagedList?.observe(viewLifecycleOwner, observerPagedList)
-
 
         binding.refreshLayout.setOnRefreshListener {
             viewModel.refresh()

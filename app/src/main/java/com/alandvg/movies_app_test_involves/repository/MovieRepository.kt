@@ -28,6 +28,13 @@ class MovieRepository(private val apiInterface: MovieEndPoint) : BaseRepository(
         )
     }
 
+    suspend fun searchMovies(page: Int = 1, search : String = ""): ResultPaging<List<Movie>>? {
+        return safeApiCall(
+            call = { apiInterface.searchMovies(page, search) },
+            error = "Error  search movies"
+        )
+    }
+
     suspend fun getMovie(id: Long): Movie? {
         return safeApiCall(
             call = { apiInterface.getMovie(id) },
