@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <item
@@ -24,9 +25,10 @@
 
 
     <item
-        android:id="@+id/searchFragment"
+        android:id="@+id/searchMoviesFragment"
         android:icon="@drawable/ic_search_24dp"
-        android:title="" />
+        android:title=""
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
 
 </menu>

@@ -34,4 +34,12 @@ interface MovieEndPoint {
         @Path("id") page: Long,
         @Query("api_key") apiKey: String = BuildConfig.ApiKey
     ): Response<Movie>
+
+
+    @GET("search/movie")
+    suspend fun searchMovies(
+        @Query("page") page: Int,
+        @Query("query") search: String,
+        @Query("api_key") apiKey: String = BuildConfig.ApiKey
+    ): Response<ResultPaging<List<Movie>>>
 }

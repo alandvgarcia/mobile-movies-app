@@ -4,4 +4,6 @@
     <string name="lbl_fragment_top_rated">Top rated movies</string>
     <string name="lbl_fragment_upcoming">Upcoming movies</string>
     <string name="lbl_error_load_movies">Ops! We found error on load the movies, try refresh page again</string>
+    <string name="search_hint">Search...</string>
+    <string name="search_title">Search</string>
 </resources>

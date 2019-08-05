@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
     app:startDestination="@id/listUpcomingMoviesFragment">
     <fragment
         android:id="@+id/listPopularMoviesFragment"
@@ -14,4 +16,9 @@
         android:id="@+id/listUpcomingMoviesFragment"
         android:name="com.alandvg.movies_app_test_involves.view.ListUpcomingMoviesFragment"
         android:label="@string/lbl_fragment_upcoming" />
+    <fragment
+        android:id="@+id/searchMoviesFragment"
+        android:name="com.alandvg.movies_app_test_involves.view.SearchMoviesFragment"
+        android:label="search_movies_fragment"
+        tools:layout="@layout/search_movies_fragment" />
 </navigation>

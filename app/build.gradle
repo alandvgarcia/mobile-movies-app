@@ -17,7 +17,7 @@ android {
     }
     buildTypes {
 
-        debug{
+        debug {
             buildConfigField 'String', "ApiKey", movieApiKey
             resValue 'string', "api_key", movieApiKey
         }
@@ -55,6 +55,9 @@ dependencies {
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$appDependencies.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$appDependencies.lifecycleVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     kapt "androidx.lifecycle:lifecycle-compiler:$appDependencies.lifecycleVersion"
 
 
