@@ -1,22 +1,33 @@
 package com.alandvg.movies_app_test_involves.model
 
 
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+
+@Entity
 data class Movie(
     @SerializedName("adult")
     var adult: Boolean? = null,
     @SerializedName("backdrop_path")
     var backdropPath: String? = null,
     @SerializedName("belongs_to_collection")
-    var belongsToCollection: Any? = null,
+    @Ignore
+    var belongsToCollection: BelongToCollection? = null,
+    @ForeignKey(entity = BelongToCollection::class, parentColumns = ["id"], childColumns = ["belongsToCollectionId"])
+    var belongsToCollectionId : Long? = null,
     @SerializedName("budget")
     var budget: Int? = null,
     @SerializedName("genres")
+    @Ignore
     var genres: List<Genre?>? = null,
     @SerializedName("homepage")
     var homepage: String? = null,
     @SerializedName("id")
+    @PrimaryKey
     var id: Int? = null,
     @SerializedName("imdb_id")
     var imdbId: String? = null,
@@ -31,8 +42,10 @@ data class Movie(
     @SerializedName("poster_path")
     var posterPath: String? = null,
     @SerializedName("production_companies")
+    @Ignore
     var productionCompanies: List<ProductionCompany?>? = null,
     @SerializedName("production_countries")
+    @Ignore
     var productionCountries: List<ProductionCountry?>? = null,
     @SerializedName("release_date")
     var releaseDate: String? = null,
@@ -41,6 +54,7 @@ data class Movie(
     @SerializedName("runtime")
     var runtime: Int? = null,
     @SerializedName("spoken_languages")
+    @Ignore
     var spokenLanguages: List<SpokenLanguage?>? = null,
     @SerializedName("status")
     var status: String? = null,

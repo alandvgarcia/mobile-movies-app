@@ -16,8 +16,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.alandvg.movies_app_test_involves.R
+import com.alandvg.movies_app_test_involves.database.AppDatabase
 import com.alandvg.movies_app_test_involves.databinding.MainActivityBinding
 import com.alandvg.movies_app_test_involves.paging.MoviesDataSource
+import com.alandvg.movies_app_test_involves.util.CacheDirUtil
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +32,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
+
+
+        val movie = AppDatabase.getInstance(this).movieDao()
+
+        CacheDirUtil.cacheDir = cacheDir
 
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)

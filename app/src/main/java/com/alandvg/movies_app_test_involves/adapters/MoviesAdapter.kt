@@ -41,10 +41,10 @@ class MoviesAdapter(private val openMovie: (Movie) -> Unit) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (getItemViewType(position) == ITEM) {
             holder as MovieViewHolder
-            getItem(position)?.let { truck ->
-                holder.bind(truck)
+            getItem(position)?.let { movie ->
+                holder.bind(movie)
                 holder.itemView.setOnClickListener {
-                    openMovie(truck)
+                    openMovie(movie)
                 }
             }
         } else (holder as ListFooterViewHolder).bind(state)

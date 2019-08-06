@@ -41,7 +41,7 @@ class ListPopularMoviesFragment : Fragment() {
     }
 
     private fun openMovie(movie: Movie) {
-
+        viewModel.saveMovie(movie)
     }
 
     override fun onCreateView(
