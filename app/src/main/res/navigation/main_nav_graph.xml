@@ -7,18 +7,26 @@
     <fragment
         android:id="@+id/listPopularMoviesFragment"
         android:name="com.alandvg.movies_app_test_involves.view.ListPopularMoviesFragment"
+        tools:layout="@layout/list_movies_fragment"
         android:label="@string/lbl_fragment_popular" />
     <fragment
         android:id="@+id/listTopRatedMoviesFragment"
         android:name="com.alandvg.movies_app_test_involves.view.ListTopRatedMoviesFragment"
+        tools:layout="@layout/list_movies_fragment"
         android:label="@string/lbl_fragment_top_rated" />
     <fragment
         android:id="@+id/listUpcomingMoviesFragment"
         android:name="com.alandvg.movies_app_test_involves.view.ListUpcomingMoviesFragment"
+        tools:layout="@layout/list_movies_fragment"
         android:label="@string/lbl_fragment_upcoming" />
     <fragment
         android:id="@+id/searchMoviesFragment"
         android:name="com.alandvg.movies_app_test_involves.view.SearchMoviesFragment"
         android:label="search_movies_fragment"
         tools:layout="@layout/search_movies_fragment" />
+    <fragment
+        android:id="@+id/savedMoviesFragment"
+        android:name="com.alandvg.movies_app_test_involves.view.SavedMoviesFragment"
+        android:label="@string/lbl_fragment_saved_movies"
+        tools:layout="@layout/list_movies_fragment" />
 </navigation>

@@ -32,6 +32,7 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
     fun refresh() = moviesDataSourceFactory.movieDataSourceLiveData.value?.invalidate()
 
     fun getMovies(movieEndpoint: Int, search : String = "") {
+
         val config = PagedList.Config.Builder()
             .setPageSize(10)
             .setPrefetchDistance(1)
@@ -55,12 +56,6 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
 
         scope.launch(Dispatchers.IO) {
             AppDatabase.getInstance(getApplication()).movieDao().insert(movie)
-
-            val movies = AppDatabase.getInstance(getApplication()).movieDao().getAll()
-
-            movies.forEach {
-                Log.d("Movie", it.toString())
-            }
         }
 
     }

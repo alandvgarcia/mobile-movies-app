@@ -50,8 +50,10 @@
                 app:startIconDrawable="@drawable/ic_search_24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:imeOptions="actionDone"
                     android:focusableInTouchMode="true"
                     android:id="@+id/tie_search"
+                    android:inputType="text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/search_hint"

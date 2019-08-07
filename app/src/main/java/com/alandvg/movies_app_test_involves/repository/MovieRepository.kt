@@ -1,5 +1,10 @@
 package com.alandvg.movies_app_test_involves.repository
 
+import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
+import androidx.paging.toLiveData
+import com.alandvg.movies_app_test_involves.database.AppDatabase
 import com.alandvg.movies_app_test_involves.model.Movie
 import com.alandvg.movies_app_test_involves.model.ResultPaging
 import com.alandvg.movies_app_test_involves.service.MovieEndPoint
@@ -40,5 +45,10 @@ class MovieRepository(private val apiInterface: MovieEndPoint) : BaseRepository(
             call = { apiInterface.getMovie(id) },
             error = "Error  get  movie"
         )
+    }
+
+
+    suspend fun getSaved(context: Context, size : Int) : LiveData<PagedList<Movie>> {
+        return AppDatabase.getInstance(context).movieDao().getAll().toLiveData(size)
     }
 }

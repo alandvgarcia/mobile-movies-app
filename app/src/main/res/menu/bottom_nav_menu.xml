@@ -19,7 +19,7 @@
         android:title="" />
 
     <item
-        android:id="@+id/favoriteMoviesFragment"
+        android:id="@+id/savedMoviesFragment"
         android:icon="@drawable/ic_favorite_black_24dp"
         android:title=""/>
 
