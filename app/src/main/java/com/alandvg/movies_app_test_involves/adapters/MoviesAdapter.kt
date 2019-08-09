@@ -1,7 +1,9 @@
 package com.alandvg.movies_app_test_involves.adapters
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.os.Build
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -12,8 +14,10 @@ import com.alandvg.movies_app_test_involves.model.Movie
 import com.alandvg.movies_app_test_involves.util.State
 import com.alandvg.movies_app_test_involves.viewholders.ListFooterViewHolder
 import com.alandvg.movies_app_test_involves.viewholders.MovieViewHolder
+import kotlin.math.hypot
+import kotlin.math.roundToInt
 
-class MoviesAdapter(private val openMovie: (Movie) -> Unit) :
+class MoviesAdapter(private val openMovie: (Movie) -> Unit, private val saveMovie : (Movie) -> Unit) :
     PagedListAdapter<Movie, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     private val ITEM = 1
@@ -43,6 +47,13 @@ class MoviesAdapter(private val openMovie: (Movie) -> Unit) :
             holder as MovieViewHolder
             getItem(position)?.let { movie ->
                 holder.bind(movie)
+
+
+                holder.itemView.setOnLongClickListener {
+                    saveMovie(movie)
+                    true
+                }
+
                 holder.itemView.setOnClickListener {
                     openMovie(movie)
                 }

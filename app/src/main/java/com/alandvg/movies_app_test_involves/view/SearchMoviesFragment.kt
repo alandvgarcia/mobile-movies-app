@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alandvg.movies_app_test_involves.R
@@ -30,7 +32,7 @@ class SearchMoviesFragment : Fragment() {
 
 
     private val observerPagedList = Observer<PagedList<Movie>> {
-        adapter = MoviesAdapter { movie: Movie -> openMovie(movie) }
+        adapter = MoviesAdapter ({ movie: Movie -> openMovie(movie) }, {movie : Movie -> saveMovie(movie) })
         binding.rvMoviesSearch.adapter = adapter
         viewModel.getState()?.observe(viewLifecycleOwner, observerState)
         adapter.submitList(it)
@@ -92,7 +94,14 @@ class SearchMoviesFragment : Fragment() {
     }
 
     private fun openMovie(movie: Movie) {
+        movie.id?.also {
+            findNavController().navigate(SearchMoviesFragmentDirections.actionSearchMoviesFragmentToMovieDetailsFragment(it.toLong()))
+        }
+    }
 
+    private fun saveMovie(movie: Movie) {
+        viewModel.saveMovie(movie)
+        Toast.makeText(activity, getString(R.string.lbl_movie_saved), Toast.LENGTH_LONG).show()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

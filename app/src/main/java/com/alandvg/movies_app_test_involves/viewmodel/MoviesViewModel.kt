@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.alandvg.movies_app_test_involves.database.AppDatabase
+import com.alandvg.movies_app_test_involves.model.Genre
 import com.alandvg.movies_app_test_involves.model.Movie
 import com.alandvg.movies_app_test_involves.paging.MoviesDataSource
 import com.alandvg.movies_app_test_involves.paging.MoviesDataSourceFactory
@@ -31,7 +32,7 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
 
     fun refresh() = moviesDataSourceFactory.movieDataSourceLiveData.value?.invalidate()
 
-    fun getMovies(movieEndpoint: Int, search : String = "") {
+    fun getMovies(movieEndpoint: Int, search: String = "") {
 
         val config = PagedList.Config.Builder()
             .setPageSize(10)
@@ -39,7 +40,7 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
             .setEnablePlaceholders(true)
             .build()
 
-        moviesDataSourceFactory = MoviesDataSourceFactory(movieEndpoint,search)
+        moviesDataSourceFactory = MoviesDataSourceFactory(movieEndpoint, search)
         itensPagedList = LivePagedListBuilder(moviesDataSourceFactory, config).build()
         state = Transformations.switchMap<MoviesDataSource,
                 State>(moviesDataSourceFactory.movieDataSourceLiveData, MoviesDataSource::state)
@@ -54,8 +55,21 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
 
     fun saveMovie(movie: Movie) {
 
+        Log.d("Movie", movie.toString())
+
         scope.launch(Dispatchers.IO) {
             AppDatabase.getInstance(getApplication()).movieDao().insert(movie)
+        }
+
+        scope.launch(Dispatchers.IO) {
+            movie.genres?.also { listGenres ->
+                listGenres.forEach { genre ->
+                    genre?.also {
+                        AppDatabase.getInstance(getApplication()).genreDao().insert(it)
+                    }
+                }
+            }
+
         }
 
     }

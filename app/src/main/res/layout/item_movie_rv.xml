@@ -51,10 +51,12 @@
 
             <TextView
                 android:id="@+id/tv_date_release"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_descricao"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/tv_titulo"
@@ -64,27 +66,17 @@
             <TextView
                 android:id="@+id/tv_descricao"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_height="0dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:maxLines="6"
-                app:layout_constraintBottom_toTopOf="@+id/img_favorite"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/tv_date_release"
                 app:layout_constraintTop_toBottomOf="@+id/tv_date_release"
                 app:layout_constraintVertical_bias="0.0"
                 tools:text="Mufasa é o rei na savana africana, respeitado por outros animais e temido por inimigos. Seu filho, Simba, tem o pai como ídolo e aprendeu com ele sobre o ciclo da…" />
-
-            <ImageView
-                android:id="@+id/img_favorite"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_favorite_border" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

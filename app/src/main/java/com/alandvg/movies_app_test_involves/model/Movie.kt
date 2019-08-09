@@ -23,7 +23,7 @@ data class Movie(
     var budget: Int? = null,
     @SerializedName("genres")
     @Ignore
-    var genres: List<Genre?>? = null,
+    var genres: List<Genre>? = null,
     @SerializedName("homepage")
     var homepage: String? = null,
     @SerializedName("id")

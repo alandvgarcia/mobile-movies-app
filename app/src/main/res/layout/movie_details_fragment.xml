@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.alandvg.movies_app_test_involves.viewmodel.MovieDetailsViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_date_release"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_titulo"
+                app:layout_constraintTop_toBottomOf="@+id/tv_titulo"
+                tools:text="18 de julho de 2019" />
+
+            <ImageView
+                android:id="@+id/img_poster"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                android:cropToPadding="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/tv_titulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:maxLines="2"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_poster"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Heman" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/tv_genre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_date_release"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date_release"
+                tools:text="Ação" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_genre"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="Mufasa é o rei na savana africana, respeitado por outros animais e temido por inimigos. Seu filho, Simba, tem o pai como ídolo e aprendeu com ele sobre o ciclo da vida e a importância de manter a harmonia e dar continuidade ao reinado da Pedra do Reino. Por outro lado, o invejoso tio Scar, ex-herdeiro do trono e irmão de Mufasa, não dava a mínima para a tradição, conseguiu fazer com que o sobrinho fosse exilado, e assim assumiu o poder. Longe de casa e de todos, Simba criou fortes laços com o lêmure Timão e o javali Pumba, dois novos e fiéis amigos. Juntos, eles viverão uma jornada de descobertas e crescimento, culminando com o retorno do adulto Simba para seu lugar de verdadeiro rei." />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

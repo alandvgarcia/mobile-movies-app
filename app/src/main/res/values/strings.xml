@@ -7,4 +7,6 @@
     <string name="search_hint">Search...</string>
     <string name="search_title">Search</string>
     <string name="lbl_fragment_saved_movies">Saved movies</string>
+    <string name="lbl_movie_saved">Movie saved</string>
+    <string name="lbl_movie_deleted">Movie deleted</string>
 </resources>
