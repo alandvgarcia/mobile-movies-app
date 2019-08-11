@@ -51,8 +51,7 @@
     </fragment>
     <activity
         android:id="@+id/movieDetailsFragment"
-        android:name="com.alandvg.movies_app_test_involves.view.MovieDetailsActivity"
-        android:label="MovieDetailsFragment" >
+        android:name="com.alandvg.movies_app_test_involves.view.MovieDetailsActivity">
         <argument
             android:name="movieId"
             app:argType="long" />

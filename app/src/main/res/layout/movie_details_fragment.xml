@@ -9,6 +9,9 @@
             name="viewModel"
             type="com.alandvg.movies_app_test_involves.viewmodel.MovieDetailsViewModel" />
 
+        <import type="com.alandvg.movies_app_test_involves.util.State"/>
+        <import type="android.view.View"/>
+
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -20,6 +23,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:visibility="@{viewModel.state == State.SUCCESS ? View.VISIBLE : View.GONE}"
                 android:id="@+id/tv_date_release"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -32,6 +36,7 @@
                 tools:text="18 de julho de 2019" />
 
             <ImageView
+                android:visibility="@{viewModel.state == State.SUCCESS ? View.VISIBLE : View.GONE}"
                 android:id="@+id/img_poster"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
@@ -44,6 +49,7 @@
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <TextView
+                android:visibility="@{viewModel.state == State.SUCCESS ? View.VISIBLE : View.GONE}"
                 android:id="@+id/tv_titulo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -61,6 +67,7 @@
                 tools:text="Heman" />
 
             <com.google.android.material.chip.ChipGroup
+                android:visibility="@{viewModel.state == State.SUCCESS ? View.VISIBLE : View.GONE}"
                 android:id="@+id/tv_genre"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -75,6 +82,7 @@
                 tools:text="Ação" />
 
             <TextView
+                android:visibility="@{viewModel.state == State.SUCCESS ? View.VISIBLE : View.GONE}"
                 android:id="@+id/tv_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -89,6 +97,21 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_genre"
                 app:layout_constraintVertical_bias="0.0"
                 tools:text="Mufasa é o rei na savana africana, respeitado por outros animais e temido por inimigos. Seu filho, Simba, tem o pai como ídolo e aprendeu com ele sobre o ciclo da vida e a importância de manter a harmonia e dar continuidade ao reinado da Pedra do Reino. Por outro lado, o invejoso tio Scar, ex-herdeiro do trono e irmão de Mufasa, não dava a mínima para a tradição, conseguiu fazer com que o sobrinho fosse exilado, e assim assumiu o poder. Longe de casa e de todos, Simba criou fortes laços com o lêmure Timão e o javali Pumba, dois novos e fiéis amigos. Juntos, eles viverão uma jornada de descobertas e crescimento, culminando com o retorno do adulto Simba para seu lugar de verdadeiro rei." />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="32dp"
+                android:visibility="@{viewModel.state == State.LOADING ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

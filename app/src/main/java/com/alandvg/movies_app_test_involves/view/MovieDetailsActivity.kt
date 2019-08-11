@@ -6,10 +6,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.marginTop
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.alandvg.movies_app_test_involves.R
 import com.alandvg.movies_app_test_involves.databinding.MovieDetailsFragmentBinding
 import com.alandvg.movies_app_test_involves.util.DateUtil
+import com.alandvg.movies_app_test_involves.util.State
 import com.alandvg.movies_app_test_involves.viewmodel.MovieDetailsViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -25,15 +27,17 @@ class MovieDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportActionBar?.setTitle("")
+
         binding =
             DataBindingUtil.setContentView(this, R.layout.movie_details_fragment)
 
         viewModel = ViewModelProviders.of(this).get(MovieDetailsViewModel::class.java)
 
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
-
 
         intent.extras?.also {
             viewModel.loadMovie(MovieDetailsActivityArgs.fromBundle(it).movieId)
@@ -70,8 +74,13 @@ class MovieDetailsActivity : AppCompatActivity() {
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.imgPoster)
+        })
 
 
+        viewModel.getState().observe(this, Observer {
+            when (it) {
+                State.FAIL -> finish()
+            }
         })
 
     }
