@@ -33,9 +33,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
 
-
-        val movie = AppDatabase.getInstance(this).movieDao()
-
         CacheDirUtil.cacheDir = cacheDir
 
 
@@ -46,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
             when (destination.id) {
                 R.id.searchMoviesFragment -> {
                     supportActionBar?.hide()

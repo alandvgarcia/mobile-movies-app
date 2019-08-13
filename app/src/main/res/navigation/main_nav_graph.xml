@@ -34,8 +34,8 @@
     <fragment
         android:id="@+id/searchMoviesFragment"
         android:name="com.alandvg.movies_app_test_involves.view.SearchMoviesFragment"
-        android:label="search_movies_fragment"
-        tools:layout="@layout/search_movies_fragment" >
+        android:label=" "
+        tools:layout="@layout/search_movies_fragment">
         <action
             android:id="@+id/action_searchMoviesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />

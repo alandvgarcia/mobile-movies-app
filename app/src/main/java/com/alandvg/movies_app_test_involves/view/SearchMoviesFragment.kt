@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
@@ -28,23 +29,19 @@ class SearchMoviesFragment : Fragment() {
 
     private lateinit var viewModel: MoviesViewModel
     private lateinit var binding: SearchMoviesFragmentBinding
-    private lateinit var adapter: MoviesAdapter
+    private var adapter: MoviesAdapter? = null
 
 
     private val observerPagedList = Observer<PagedList<Movie>> {
-        adapter = MoviesAdapter ({ movie: Movie -> openMovie(movie) }, {movie : Movie -> saveMovie(movie) })
+        adapter = MoviesAdapter({ movie: Movie -> openMovie(movie) },
+            { movie: Movie -> saveMovie(movie) })
         binding.rvMoviesSearch.adapter = adapter
         viewModel.getState()?.observe(viewLifecycleOwner, observerState)
-        adapter.submitList(it)
+        adapter?.submitList(it)
     }
 
     private val observerState = Observer<State> {
-        if (it == State.LOADING && (viewModel.listIsEmpty())) {
-            // binding.refreshLayout.isRefreshing = true
-        } else {
-            // binding.refreshLayout.isRefreshing = false
-            adapter.setState(it ?: State.SUCCESS)
-        }
+        adapter?.setState(it ?: State.SUCCESS)
     }
 
     override fun onCreateView(
@@ -64,15 +61,15 @@ class SearchMoviesFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
-
-
-        binding.tieSearch.addTextChangedListener {
-
-            if (savedInstanceState?.getString("search") != it.toString()) {
-                viewModel.getMovies(MoviesDataSource.SEARCH, it.toString())
+        binding.tieSearch.setOnEditorActionListener { textView, i, keyEvent ->
+            if (savedInstanceState?.getString("search") != textView.text.toString()) {
+                viewModel.getMovies(MoviesDataSource.SEARCH, textView.text.toString())
             }
             addObservables()
+            KeyboardUtil.hideKeyboard(activity!!)
+            true
         }
+
 
         binding.tieSearch.requestFocus()
         KeyboardUtil.showKeyboard(activity!!, binding.tieSearch)
@@ -95,7 +92,11 @@ class SearchMoviesFragment : Fragment() {
 
     private fun openMovie(movie: Movie) {
         movie.id?.also {
-            findNavController().navigate(SearchMoviesFragmentDirections.actionSearchMoviesFragmentToMovieDetailsFragment(it.toLong()))
+            findNavController().navigate(
+                SearchMoviesFragmentDirections.actionSearchMoviesFragmentToMovieDetailsFragment(
+                    it.toLong()
+                )
+            )
         }
     }
 
