@@ -19,8 +19,6 @@ internal object MovieApiService {
     val TAG = this@MovieApiService.javaClass.simpleName
     val URL_API = "https://api.themoviedb.org/3/"
 
-
-
     private fun provideRetrofit(baseUrl: String): Retrofit {
         val cacheSize = 10 * 1024 * 1024 // 10 MB
         val httpCacheDirectory = File(CacheDirUtil.cacheDir, "http-cache")
@@ -35,13 +33,13 @@ internal object MovieApiService {
             .writeTimeout(20, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(logging)
+            .retryOnConnectionFailure(true)
             .cache(cache)
             .build()
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

@@ -79,7 +79,6 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$appDependencies.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$appDependencies.retrofitVersion"
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$appDependencies.retrofitCoroutineVersion"
 
     //Paging lib
     implementation "androidx.paging:paging-runtime-ktx:$appDependencies.pagingVersion"
