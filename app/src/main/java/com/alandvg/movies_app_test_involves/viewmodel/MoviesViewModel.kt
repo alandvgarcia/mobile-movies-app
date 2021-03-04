@@ -13,6 +13,8 @@ import com.alandvg.movies_app_test_involves.model.Genre
 import com.alandvg.movies_app_test_involves.model.Movie
 import com.alandvg.movies_app_test_involves.paging.MoviesDataSource
 import com.alandvg.movies_app_test_involves.paging.MoviesDataSourceFactory
+import com.alandvg.movies_app_test_involves.repository.MovieRepository
+import com.alandvg.movies_app_test_involves.service.MovieApiService
 import com.alandvg.movies_app_test_involves.util.State
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +23,9 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class MoviesViewModel(application: Application) : AndroidViewModel(application) {
+
+
+    private val movieRepository = MovieRepository(MovieApiService.movies())
 
     var itensPagedList: LiveData<PagedList<Movie>>? = null
     private var state: LiveData<State>? = null
@@ -35,10 +40,10 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
     fun getMovies(movieEndpoint: Int, search: String = "") {
 
         val config = PagedList.Config.Builder()
-            .setPageSize(10)
-            .setPrefetchDistance(1)
-            .setEnablePlaceholders(true)
-            .build()
+                .setPageSize(10)
+                .setPrefetchDistance(1)
+                .setEnablePlaceholders(true)
+                .build()
 
         moviesDataSourceFactory = MoviesDataSourceFactory(movieEndpoint, search)
         itensPagedList = LivePagedListBuilder(moviesDataSourceFactory, config).build()
@@ -54,23 +59,8 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun saveMovie(movie: Movie) {
-
-        Log.d("Movie", movie.toString())
-
         scope.launch(Dispatchers.IO) {
-            AppDatabase.getInstance(getApplication()).movieDao().insert(movie)
+            movieRepository.saveMovie(getApplication(), movie)
         }
-
-        scope.launch(Dispatchers.IO) {
-            movie.genres?.also { listGenres ->
-                listGenres.forEach { genre ->
-                    genre?.also {
-                        AppDatabase.getInstance(getApplication()).genreDao().insert(it)
-                    }
-                }
-            }
-
-        }
-
     }
 }
