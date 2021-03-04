@@ -1,17 +1,13 @@
 package com.alandvg.movies_app_test_involves.service
 
-import android.content.Context
 import com.alandvg.movies_app_test_involves.util.CacheDirUtil
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Cache
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
-import okhttp3.logging.HttpLoggingInterceptor
-
 
 
 internal object MovieApiService {
