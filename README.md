@@ -1,4 +1,4 @@
-# mobile-movies-app-involves
+# mobile-movies-app
 
 
 Defina a key da API no gradle.properties <br />
