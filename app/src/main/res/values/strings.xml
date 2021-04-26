@@ -9,4 +9,6 @@
     <string name="lbl_fragment_saved_movies">Saved movies</string>
     <string name="lbl_movie_saved">Movie saved</string>
     <string name="lbl_movie_deleted">Movie deleted</string>
+    <string name="title_activity_main">My Movies Compose</string>
+    <string name="lbl_search_movies">Search movie</string>
 </resources>
